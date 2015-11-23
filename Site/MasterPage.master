@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Urho</title>
+    <asp:ContentPlaceHolder id="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:HyperLink ID="Add" runat="server" NavigateUrl="~/add.aspx">Lisää Suoritus</asp:HyperLink>
+            <asp:HyperLink ID="All" runat="server" NavigateUrl="~/all.aspx">Viimeisimmät Suoritukset</asp:HyperLink>
+            <asp:HyperLink ID="Top" runat="server" NavigateUrl="~/top.aspx">Top-liikkujat</asp:HyperLink>
+            <asp:HyperLink ID="Own" runat="server" NavigateUrl="~/own.aspx">Omat Suoritukset</asp:HyperLink>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="Body" runat="server" />
+        </div>
+        <div style="position:absolute; left:5px; bottom:5px;">
+            <i>&copy; Juuso Ohra-aho 2015</i>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="G7934Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accoplishment">
+          <Key>
+            <PropertyRef Name="idAccoplishmnet" />
+          </Key>
+          <Property Name="idAccoplishmnet" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Person" Type="int" Nullable="false" />
+          <Property Name="Sport" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="idSport" />
+          </Key>
+          <Property Name="idSport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Accoplishment_Person1">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Accoplishment" Type="Self.Accoplishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Accoplishment">
+              <PropertyRef Name="Person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Accoplishment_Sport1">
+          <End Role="Sport" Type="Self.Sport" Multiplicity="1" />
+          <End Role="Accoplishment" Type="Self.Accoplishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="idSport" />
+            </Principal>
+            <Dependent Role="Accoplishment">
+              <PropertyRef Name="Sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="G7934ModelStoreContainer">
+          <EntitySet Name="Accoplishment" EntityType="Self.Accoplishment" Schema="G7934" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="G7934" store:Type="Tables" />
+          <EntitySet Name="Sport" EntityType="Self.Sport" Schema="G7934" store:Type="Tables" />
+          <AssociationSet Name="fk_Accoplishment_Person1" Association="Self.fk_Accoplishment_Person1">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Accoplishment" EntitySet="Accoplishment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Accoplishment_Sport1" Association="Self.fk_Accoplishment_Sport1">
+            <End Role="Sport" EntitySet="Sport" />
+            <End Role="Accoplishment" EntitySet="Accoplishment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="G7934Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accoplishment">
+          <Key>
+            <PropertyRef Name="idAccoplishmnet" />
+          </Key>
+          <Property Name="idAccoplishmnet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Person" Type="Int32" Nullable="false" />
+          <Property Name="Sport" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person1" Relationship="Self.fk_Accoplishment_Person1" FromRole="Accoplishment" ToRole="Person" />
+          <NavigationProperty Name="Sport1" Relationship="Self.fk_Accoplishment_Sport1" FromRole="Accoplishment" ToRole="Sport" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="idPerson" />
+          </Key>
+          <Property Name="idPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accoplishments" Relationship="Self.fk_Accoplishment_Person1" FromRole="Person" ToRole="Accoplishment" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="idSport" />
+          </Key>
+          <Property Name="idSport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accoplishments" Relationship="Self.fk_Accoplishment_Sport1" FromRole="Sport" ToRole="Accoplishment" />
+        </EntityType>
+        <Association Name="fk_Accoplishment_Person1">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Accoplishment" Type="Self.Accoplishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="idPerson" />
+            </Principal>
+            <Dependent Role="Accoplishment">
+              <PropertyRef Name="Person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Accoplishment_Sport1">
+          <End Role="Sport" Type="Self.Sport" Multiplicity="1" />
+          <End Role="Accoplishment" Type="Self.Accoplishment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="idSport" />
+            </Principal>
+            <Dependent Role="Accoplishment">
+              <PropertyRef Name="Sport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="G7934Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accoplishments" EntityType="Self.Accoplishment" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Sports" EntityType="Self.Sport" />
+          <AssociationSet Name="fk_Accoplishment_Person1" Association="Self.fk_Accoplishment_Person1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Accoplishment" EntitySet="Accoplishments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Accoplishment_Sport1" Association="Self.fk_Accoplishment_Sport1">
+            <End Role="Sport" EntitySet="Sports" />
+            <End Role="Accoplishment" EntitySet="Accoplishments" />
+          </AssociationSet>
+          </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="G7934ModelStoreContainer" CdmEntityContainer="G7934Entities">
+          <EntitySetMapping Name="Accoplishments">
+            <EntityTypeMapping TypeName="IsTypeOf(G7934Model.Accoplishment)">
+              <MappingFragment StoreEntitySet="Accoplishment">
+                <ScalarProperty Name="idAccoplishmnet" ColumnName="idAccoplishmnet" />
+                <ScalarProperty Name="Sport" ColumnName="Sport" />
+                <ScalarProperty Name="Person" ColumnName="Person" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="G7934Model.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="idPerson" ColumnName="idPerson" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sports">
+            <EntityTypeMapping TypeName="G7934Model.Sport">
+              <MappingFragment StoreEntitySet="Sport">
+                <ScalarProperty Name="idSport" ColumnName="idSport" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
