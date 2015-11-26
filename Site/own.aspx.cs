@@ -35,6 +35,7 @@ public partial class own : System.Web.UI.Page
                           join a in ctx.People on c.Person equals a.idPerson
                           join b in ctx.Sports on c.Sport equals b.idSport
                           where a.Name == nameForWhere
+                          orderby c.Date descending
                           select new GridViewClassB
                           {
                               Nimi = a.Name,
@@ -50,9 +51,11 @@ public partial class own : System.Web.UI.Page
 
             lblUser.Text = "Näytetään henkilön " + nameForWhere + " tulokset";
         }
-        else if (Session["name"] != null)
+        //else if (Session["name"] != null)
+        else if (Request.Cookies["UserSettings"] != null)
         {
-            string nameForWhere = Session["name"].ToString();
+            //string nameForWhere = Session["name"].ToString();
+            string nameForWhere = Request.Cookies["UserSettings"]["Name"];
             ctx = new G7934Entities();
             var results = from c in ctx.Accoplishments
                           join a in ctx.People on c.Person equals a.idPerson
@@ -98,13 +101,20 @@ public partial class own : System.Web.UI.Page
 
     protected void ddlUser_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Session["name"] = ddlUser.SelectedItem.Text;
+        //Session["name"] = ddlUser.SelectedItem.Text;
+        HttpCookie myCookie = new HttpCookie("UserSettings");
+        myCookie["Name"] = ddlUser.SelectedItem.Text;
+        myCookie.Expires = DateTime.Now.AddYears(1);
+        Response.Cookies.Add(myCookie);
         Response.Redirect(Request.RawUrl);
     }
 
     protected void btnLogOut_Click(object sender, EventArgs e)
     {
-        Session["name"] = null;
+        //Session["name"] = null;
+        HttpCookie myCookie = new HttpCookie("UserSettings");
+        myCookie.Expires = DateTime.Now.AddDays(-1d);
+        Response.Cookies.Add(myCookie);
         Response.Redirect(Request.RawUrl);
     }
 }

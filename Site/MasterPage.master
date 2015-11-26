@@ -6,17 +6,54 @@
 <head runat="server">
     <title>Urho</title>
     <asp:ContentPlaceHolder id="head" runat="server" />
-</head>
+    <script type="text/javascript">
+        function helpON()
+        {
+            document.getElementById("divBody").style.display = "none";
+            document.getElementById("helpDiv").style.display = "block";
+        }
+        function helpOFF() {
+            document.getElementById("divBody").style.display = "block";
+            document.getElementById("helpDiv").style.display = "none";
+        }
+    </script>
+ </head>
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Label ID="lblHelp" runat="server" Text="HELP" onmouseenter="helpON()" onmouseleave="helpOFF()"></asp:Label>
             <asp:HyperLink ID="Add" runat="server" NavigateUrl="~/add.aspx">Lisää Suoritus</asp:HyperLink>
             <asp:HyperLink ID="All" runat="server" NavigateUrl="~/all.aspx">Viimeisimmät Suoritukset</asp:HyperLink>
             <asp:HyperLink ID="Top" runat="server" NavigateUrl="~/top.aspx">Top-liikkujat</asp:HyperLink>
             <asp:HyperLink ID="Own" runat="server" NavigateUrl="~/own.aspx">Omat Suoritukset</asp:HyperLink>
         </div>
-        <div>
+        <div id="divBody">
             <asp:ContentPlaceHolder ID="Body" runat="server" />
+        </div>
+        <div id="helpDiv" style="display:none">
+            <p>
+                <b>Lisäys:</b>
+                <br />
+                Nimi syötetään muodossa Etunimi Sukunimi.
+                <br /><br />
+                Liikkumismuoto valitaan luettelosta jos lisätään uusi muoto kirjoitetaan <br />
+                se isolla alkukirjaimella esim. Melonta tai Kiipeily.
+                <br /><br />
+                Kesto ilmoitetaan minuutteina esim. 20 tai 33.
+                <br /><br />
+                Voit kirjata yhdelle päivälle maksimissaa 5 suoritusta.
+                <br /><br />
+                <b>Muokkaus:</b>
+                <br />
+                Jo kirjattua suoritustasi voit muokata omat suoritukset osiossa.
+                <br /><br />
+                <b>Selailu:</b>
+                <br />
+                Viimeisimmät- ja TOP-suoritukset näkymistä näet suorittajan kaikki suoritukset<br />
+                hänen nimeään klikkaamalla.
+                <br /><br /><br />
+                Kysymyksiä sovelluksesta voit lähettää osoitteeseen: G7934 (at) student.jamk.fi
+            </p>
         </div>
         <div style="position:absolute; left:5px; bottom:5px;">
             <i>&copy; Juuso Ohra-aho 2015</i>

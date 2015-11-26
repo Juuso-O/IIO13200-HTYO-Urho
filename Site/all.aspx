@@ -45,7 +45,18 @@
             </asp:TableRow>
         </asp:Table>
     </p>
-    <asp:GridView ID="gvData" runat="server" />
+    <asp:GridView ID="gvData" runat="server" AutoGenerateColumns="false">
+        <Columns>
+            <asp:HyperLinkField
+                HeaderText="Nimi"
+                DataTextField="Nimi"
+                DataNavigateUrlFormatString="~/own.aspx?name={0}"
+                DataNavigateUrlFields="Nimi" />
+            <asp:BoundField DataField="Pvm" HeaderText="Päivämäärä" />
+            <asp:BoundField DataField="Laji" HeaderText="Laji" />
+            <asp:BoundField DataField="Kesto" HeaderText="Kesto(min)" />
+        </Columns>
+    </asp:GridView>
     <div style="display: none;">
         <asp:Button ID="btnTxtStartEventHandler" runat="server" OnClick ="btnTxtStartEventHandler_Click" />
         <asp:Button ID="btnTxtEndEventHandler" runat="server" OnClick ="btnTxtEndEventHandler_Click" />

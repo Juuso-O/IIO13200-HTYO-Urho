@@ -10,7 +10,17 @@
                 <asp:Label ID="lblName" runat="server" Text="Nimi" />
             </td>
             <td>
-                <asp:TextBox ID="txtName" runat="server" />
+                <div id="divEditableName" runat="server">
+                    <asp:TextBox ID="txtName" runat="server" />
+                    <asp:RegularExpressionValidator ID="regexpName" runat="server"     
+                                    ErrorMessage="Nimi ei kelpaa" 
+                                    ControlToValidate="txtName"     
+                                    ValidationExpression="[A-ZÄÖ][a-zäö'-]+([A-ZÄÖ][a-zäö'-])*\s[A-ZÄÖ][a-zäö'-]+"
+                                    style="color:red"/>
+                </div>
+                <div id="divUnEditableName" runat="server" Visible="false">
+                    <asp:DropDownList ID="ddlName" runat="server"></asp:DropDownList>
+                </div>
             </td>
         </tr>
         <tr>
@@ -21,15 +31,19 @@
                 <asp:DropDownList ID="ddlSport" runat="server" OnSelectedIndexChanged="ddlSport_SelectedIndexChanged" AutoPostBack="True" />
             </td>
         </tr>
-        <tr>
+        <tr id="trNewSport" runat="server" visible="false">
             <td>
-                <asp:Label ID="lblNewSportName" runat="server" Text="Uuden lajin nimi" Visible="false"/>
+                <asp:Label ID="lblNewSportName" runat="server" Text="Uuden lajin nimi"/>
             </td>
             <td>
-                <asp:TextBox ID="txtNewSport" runat="server" Visible="false" />
-            </td>
-            <td>
-                <asp:Button ID="btnAddNewSport" runat="server" Text="Lisää laji" OnClick="btnAddNewSport_Click" Visible="false"/>
+                <asp:TextBox ID="txtNewSport" runat="server" />
+                <asp:Button ID="btnAddNewSport" runat="server" Text="Lisää laji" OnClick="btnAddNewSport_Click" />
+                <asp:RegularExpressionValidator ID="regExNewSport" runat="server"     
+                                    ErrorMessage="Nimi ei kelpaa" 
+                                    ControlToValidate="txtNewSport"     
+                                    ValidationExpression="[A-Z][a-z-]+"
+                                    style="color:red"/>
+                
             </td>
         </tr>
         <tr>
@@ -46,6 +60,11 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDuration" runat="server" />
+                <asp:RegularExpressionValidator ID="regExDuration" runat="server"     
+                                    ErrorMessage="Kesto ei kelpaa" 
+                                    ControlToValidate="txtDuration"     
+                                    ValidationExpression="^[0-9]{1,3}$"
+                                    style="color:red"/>
             </td>
         </tr>
     </table>

@@ -55,8 +55,22 @@ public partial class all : System.Web.UI.Page
 
     private void ddlPopulateWithDates()
     {
-        startDate = DateTime.Parse(txtStart.Text);
-        endDate = DateTime.Parse(txtEnd.Text);
+        if (txtStart.Text != "")
+        {
+            startDate = DateTime.Parse(txtStart.Text);
+        }
+        else
+        {
+            startDate = DateTime.Parse("01.01.2000");
+        }
+        if (txtEnd.Text != "")
+        {
+            endDate = DateTime.Parse(txtEnd.Text);
+        }
+        else
+        {
+            endDate = DateTime.Parse("01.01.2100");
+        }
 
         ctx = new G7934Entities();
         var results = from c in ctx.Accoplishments
