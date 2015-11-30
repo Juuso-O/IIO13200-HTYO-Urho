@@ -8,18 +8,19 @@ using System.Web.UI.WebControls;
 public partial class own : System.Web.UI.Page
 {
     G7934Entities ctx;
-
-    public class GridViewClassA
+    
+    public class GridViewClassC
     {
         public string Nimi { get; set; }
         public DateTime Pvm { get; set; }
         public string Laji { get; set; }
         public int Kesto { get; set; }
+        public int Id { get; set; }
     }
-    public class GridViewClassB
+    public class GridViewClassD
     {
         public string Nimi { get; set; }
-        public DateTime Pvm { get; set; }
+        public string Pvm { get; set; }
         public string Laji { get; set; }
         public int Kesto { get; set; }
         public int Id { get; set; }
@@ -36,7 +37,7 @@ public partial class own : System.Web.UI.Page
                           join b in ctx.Sports on c.Sport equals b.idSport
                           where a.Name == nameForWhere
                           orderby c.Date descending
-                          select new GridViewClassB
+                          select new GridViewClassC
                           {
                               Nimi = a.Name,
                               Pvm = c.Date,
@@ -44,8 +45,22 @@ public partial class own : System.Web.UI.Page
                               Kesto = c.Duration,
                               Id = c.idAccoplishmnet
                           };
-            
-            gvData.DataSource = results.ToList();
+
+            List<GridViewClassD> list = new List<GridViewClassD>();
+            foreach (var item in results)
+            {
+                list.Add(new GridViewClassD()
+                {
+                    Nimi = item.Nimi,
+                    Pvm = item.Pvm.ToString("dd.MM.yyyy"),
+                    Laji = item.Laji,
+                    Kesto = item.Kesto,
+                    Id = item.Id
+                });
+            }
+
+            //gvData.DataSource = results.ToList();
+            gvData.DataSource = list;
             gvData.DataBind();
             gvData.Columns[0].Visible = false;
 
@@ -61,7 +76,7 @@ public partial class own : System.Web.UI.Page
                           join a in ctx.People on c.Person equals a.idPerson
                           join b in ctx.Sports on c.Sport equals b.idSport
                           where a.Name == nameForWhere
-                          select new GridViewClassB
+                          select new GridViewClassC
                           {
                               Nimi = a.Name,
                               Pvm = c.Date,
@@ -69,8 +84,22 @@ public partial class own : System.Web.UI.Page
                               Kesto = c.Duration,
                               Id = c.idAccoplishmnet
                           };
-            
-            gvData.DataSource = results.ToList();
+
+            List<GridViewClassD> list = new List<GridViewClassD>();
+            foreach (var item in results)
+            {
+                list.Add(new GridViewClassD()
+                {
+                    Nimi = item.Nimi,
+                    Pvm = item.Pvm.ToString("dd.MM.yyyy"),
+                    Laji = item.Laji,
+                    Kesto = item.Kesto,
+                    Id = item.Id
+                });
+            }
+
+            gvData.DataSource = list;
+            //gvData.DataSource = results.ToList();
             gvData.DataBind();
             gvData.Columns[1].Visible = false;
 

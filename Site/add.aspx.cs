@@ -84,13 +84,14 @@ public partial class add : System.Web.UI.Page
 
         // Generating 14 dates back from today and setting
         // them as datasource to datelist
-        List<DateTime> dates = new List<DateTime>();
+        List<String> dates = new List<string>();
+        //List<DateTime> dates = new List<DateTime>();
         DateTime date = DateTime.Today;
-        dates.Add(date);
+        dates.Add(date.ToString("dd.MM.yyyy"));
         for (int i = 0; i < 13; i++)
         {
             date = date.AddDays(-1);
-            dates.Add(date);
+            dates.Add(date.ToString("dd.MM.yyyy"));
         }
         ddlDate.DataSource = dates;
         ddlDate.DataBind();

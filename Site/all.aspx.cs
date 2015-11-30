@@ -16,6 +16,16 @@ public partial class all : System.Web.UI.Page
     {
         public string Nimi { get; set; }
         public DateTime Pvm { get; set; }
+        //public string Pvm { get; set; }
+        public string Laji { get; set; }
+        public int Kesto { get; set; }
+    }
+
+    public class GridViewClassB
+    {
+        public string Nimi { get; set; }
+        //public DateTime Pvm { get; set; }
+        public string Pvm { get; set; }
         public string Laji { get; set; }
         public int Kesto { get; set; }
     }
@@ -47,9 +57,22 @@ public partial class all : System.Web.UI.Page
                           Kesto = c.Duration
                       };
 
-        var resultList = results.ToList();
-        resultList.RemoveRange(15, resultList.Count - 15);
-        gvData.DataSource = resultList;
+        List<GridViewClassB> list = new List<GridViewClassB>();
+        foreach (var item in results)
+        {
+            list.Add(new GridViewClassB()
+            {
+                Nimi = item.Nimi,
+                Pvm = item.Pvm.ToString("dd.MM.yyyy"),
+                Laji = item.Laji,
+                Kesto = item.Kesto
+            });
+        }
+
+        //var resultList = results.ToList();
+        //resultList.RemoveRange(15, resultList.Count - 15);
+        list.RemoveRange(15, list.Count - 15);
+        gvData.DataSource = list;
         gvData.DataBind();
     }
 
@@ -86,7 +109,19 @@ public partial class all : System.Web.UI.Page
                           Kesto = c.Duration
                       };
 
-        gvData.DataSource = results.ToList();
+        List<GridViewClassB> list = new List<GridViewClassB>();
+        foreach (var item in results)
+        {
+            list.Add(new GridViewClassB()
+            {
+                Nimi = item.Nimi,
+                Pvm = item.Pvm.ToString("dd.MM.yyyy"),
+                Laji = item.Laji,
+                Kesto = item.Kesto
+            });
+        }
+        
+        gvData.DataSource = list;
         gvData.DataBind();
     }
 
