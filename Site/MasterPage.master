@@ -55,7 +55,7 @@
                 Kysymyksiä sovelluksesta voit lähettää osoitteeseen: G7934 (at) student.jamk.fi
             </p>
         </div>
-        <div style="position:absolute; left:5px; bottom:5px;">
+        <div style="position:absolute; right:5px; bottom:5px;">
             <i>&copy; Juuso Ohra-aho 2015</i>
         </div>
     </form>
